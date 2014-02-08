@@ -36,45 +36,60 @@ Password: rgdemo14
 
 ## Prerequisites
 
-1. account on www.heroku.com (with credit card information)
-
-2. install heroku toolbelt (https://toolbelt.heroku.com/)
-
-3. install git (http://git-scm.com/downloads)
+- account on www.heroku.com (with credit card information)
+- install heroku toolbelt (https://toolbelt.heroku.com/)
+- install git (http://git-scm.com/downloads)
 
 
-What to do:
+## Instructions
 1. Download Project
   * open your terminal
   * go to the directory you want to create the project by using >$ cd
   * run the following command to download the repository:
-	>$ git clone git@github.com:RailsGirlsWorkshopManagement/RailsGirlsWorkshopManagementApp.git
 
-2.
+```
+$ git clone git@github.com:RailsGirlsWorkshopManagement/RailsGirlsWorkshopManagementApp.git
+```
+
+2. Create Heroku App
   * run the following commands to login to your heroku accound and create your app:
-	> $ heroku login
-	enter heroku credentials and generate a public key if non-existing
-	> $ heroku create app-name --addons mongohq
+
+```
+$ heroku login
+//enter heroku credentials and generate a public key if non-existing
+$ heroku create app-name --addons mongohq
+```
 
   * from now on you can find your app under the following url: http://app-name.herokuapp.com/
 
-3.
-add the following in ".git/config" (the folder .git is normally hidden so change your preferences if you can't find in)
+3. Create git remote
+  * add the following in ".git/config" (the folder .git is normally hidden so change your preferences if you can't find in)
 
-[remote "app_name"]
+```
+ [remote "app_name"]
         url = git@heroku.com:app_name.git
         fetch = +refs/heads/*:refs/remotes/heroku/*
+```
 
-4.
+4. Settings for Environment Variables
   *run the following command in the terminal:
-	> $ heroku labs:enable user-env-compile --app app_name
 
-5.
-	> $ git push app_name master
+```
+$ heroku labs:enable user-env-compile --app app_name
+```
+
+5. Push your app to heroku
+
+```
+$ git push app_name master
+```
 
 6.
 create migration and admin in rails console by running the following commands:
-	> $ heroku run rake db:migrate --app app-name
-	> $ heroku run rails c --app app_name
-	> > User.delete_all
-	> > User.create(:name=>"admin", :email=>"admin@railsgirls.com", :password= "password", :password_confirmation=>"password")
+
+```
+$ heroku run rake db:migrate --app app-name
+$ heroku run rails c --app app_name
+> User.delete_all
+> User.create(:name=>"admin", :email=>"admin@railsgirls.com", :password= "password", :password_confirmation=>"password")
+```

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <ss:Styles>
+          <ss:Style ss:ID="1">
+              <ss:Font ss:Bold="1"/>
+          </ss:Style>
+      </ss:Styles>
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row ss:StyleID="1">
+        <% if (@participant_registrations.first != nil) && (!@participant_structure.blank?)%>
+          <% @participant_structure.each do |element| %>
+            <Cell><Data ss:Type="String"> <%= element['caption']%> </Data></Cell>
+          <% end %>
+        <% end %>
+      </Row>
+    <% @participant_registrations.each do |registration| %>
+      <Row>
+        <% @participant_structure.each do |element| %>
+          <Cell><Data ss:Type="String"><%= registration["attributes"][element["name"]] %></Data></Cell>
+        <% end %>
+      </Row>
+    <% end %>
+    <Row></Row>
+    <Row></Row>
+    <Row ss:StyleID="1">
+      <% if (@coach_registrations.first != nil) && (!@coach_structure.blank?)%>
+        <% @coach_structure.each do |element| %>
+          <Cell><Data ss:Type="String"> <%= element['caption']%> </Data></Cell>
+        <% end %>
+      <% end %>
+    </Row>
+    <% @coach_registrations.each do |registration| %>
+      <Row>
+        <% @coach_structure.each do |element| %>
+          <Cell><Data ss:Type="String"><%= registration["attributes"][element["name"]] %></Data></Cell>
+        <% end %>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

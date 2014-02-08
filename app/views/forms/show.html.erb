@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<script type="text/javascript">
+	structure_to_render = <%= @form.structure.html_safe %>;
+</script>
+
+<form id="form_preview"></form>
+<% if params[:workshop_id] != nil %>
+    <%= button_to "Add to Workshop and modify", { :controller => "workshops", :action => "addForm", :form_id=>params[:id], :type=>params[:type], :id=>params[:workshop_id]}%>
+<% end %>
+
+<% if not params[:workshop_id] %>
+	<%= link_to 'Back to workshop', edit_workshop_path(@form.workshop) %>
+<% else %>
+	<%= link_to 'Show all forms', forms_path(:type=>params[:type], :workshop_id=>params[:workshop_id]) %>
+<% end %>

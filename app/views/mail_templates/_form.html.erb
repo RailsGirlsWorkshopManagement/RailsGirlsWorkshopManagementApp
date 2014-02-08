@@ -1,0 +1,32 @@
+<%= form_for(@mail_template) do |f| %>
+  <% if @mail_template.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mail_template.errors.count, "error") %> prohibited this mail_template from being saved:</h2>
+
+      <ul>
+      <% @mail_template.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :subject %><br>
+    <%= f.text_field :subject %>
+  </div>
+  <div class="field">
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </div>
+  <input name="mail_template[workshop_id]" type="hidden" value="<%= @mail_template.workshop_id || params["workshop_id"] %>" />
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+  <div class="actions">

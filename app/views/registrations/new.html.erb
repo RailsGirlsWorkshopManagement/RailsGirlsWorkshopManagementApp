@@ -1,0 +1,25 @@
+<% provide(:title, 'New registration') %>
+<h1>New registration</h1>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Date</th>
+			<th>Venue</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr>
+				<td><%=@workshop.name%></td>
+				<td><%=@workshop.description%></td>
+				<td><%=@workshop.date%></td>
+				<td><%=@workshop.venue%></td>
+			</tr>
+	</tbody>
+</table>
+<div>
+  <div class="span6 offset3">
+    <%= render 'form' %>
+  </div>
+</div>

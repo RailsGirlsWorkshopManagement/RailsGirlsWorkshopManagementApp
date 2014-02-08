@@ -1,0 +1,3 @@
+class CoachForm < Form
+	
+end

@@ -1,0 +1,107 @@
+<% provide(:title, 'Listing registrations') %>
+<h1>Listing Registrations</h1>
+<div id="list_options">
+  <%= form_tag(registrations_path, :method => :get) do %>
+    <dl>
+      <dt>Workshop</dt>
+      <dd>
+        <%= select_tag'workshop', options_for_select(@list_options[:workshop], @previously_selected_workshop)%>
+      </dd>
+      <dt>Form Type</dt>
+      <dd>
+        <%= select_tag'form_type', options_for_select(@list_options[:form_type], @previously_selected_type)%>
+      </dd>
+    </dl>
+  <% end %>
+</div>
+
+<div id="list_registrations">
+    <a id="maximize_all"><i class="fa fa-plus"></i> maximize all</a>
+    <br>
+    <a id="minimize_all"><i class="fa fa-minus"></i> maximize all</a>
+    <table>
+      <thead>
+        <tr>
+          <% if (@participant_registrations.first != nil) && (!@participant_structure.blank?)%>
+            <%index= 0%>
+            <% @participant_structure.each do |element| %>
+              <td data-id=<%=index%> title="<%= element['caption']%>" ><strong> <%= element['caption']%> </strong></td>
+              <%index += 1%>
+            <% end %>
+              <td><strong>Accept</strong></td>
+              <td><strong>Cancled</strong></td>
+              <td><strong>Comment</strong></td>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @participant_registrations.each do |registration| %>
+          <tr class="<%= registration["attributes"]["cancled"] ? "cancledRegistration" : "" %>">
+            <% index = 0%>
+            <% @participant_structure.each do |element| %>
+              <td data-id=<%=index%>>
+                <span><%= registration["attributes"][element["name"]] %></span>
+              </td>
+              <%index += 1%>
+            <% end %>
+
+            <td>
+              <%= form_tag "/registrations/accept_registrations" do %>
+                <%=hidden_field_tag registration["id"], '0'%>
+                <%= check_box_tag registration["id"], '1', registration["attributes"]["accepted"]%>
+              <% end %>
+            </td>
+
+            <td><%= registration["attributes"]["cancled"] ? "YES" : "" %></td>
+
+            <td>
+              <%= form_tag "/registrations/comment_registrations" do %>
+                <%= hidden_field :registration, :id, :value => registration["id"] %>
+                <%= text_area :registration, :comment, :value => registration["attributes"]["comment"], class: "comment" %>
+              <% end %>
+            </td>
+
+
+            <td><%= link_to 'Destroy', registration_path(registration["id"]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% params.each do |key, value| %>
+      <%=hidden_field_tag key, value %>
+    <% end %>
+    <table>
+      <thead>
+        <tr>
+          <% if (@coach_registrations.first != nil) && (!@coach_structure.blank?)%>
+            <%index= 0%>
+            <% @coach_structure.each do |element| %>
+              <td data-id=<%=index%> title="<%= element['caption']%>" ><strong> <%= element['caption']%> </strong></td>
+              <%index += 1%>
+            <% end %>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @coach_registrations.each do |registration| %>
+          <tr>
+            <%index= 0%>
+            <% @coach_structure.each do |element| %>
+              <td data-id=<%=index%>>
+                <span><%= registration["attributes"][element["name"]] %></span>
+              </td>
+              <%index += 1%>
+            <% end %>
+            <td><%= link_to 'Destroy', registration_path(registration["id"]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+<%- params[:format] = "csv"
+-%>
+<%= link_to "Export CSV", registrations_path(params) %> |
+<%- params[:format] = "xls"
+-%>
+<%= link_to "Export Excel", registrations_path(params) %>
+

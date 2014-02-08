@@ -1,0 +1,57 @@
+$lightGray: #999;
+
+#form_preview {
+	&.editable {
+		label {
+			cursor: pointer;
+
+			&:hover::after {
+				color: #999;
+				margin-left: 10px;
+				content: "\f040";
+				font-family: "FontAwesome";
+				font-weight: normal;
+				font-style: normal;
+				display: inline-block;
+				text-decoration: inherit;
+			}
+		}
+	}
+}
+
+#add_structure {
+	padding: 20px;
+	background: #efefef;
+}
+
+.delete_element {
+	display: block;
+	margin: -10px 0 10px 0;
+}
+
+.form_preview_card{
+	a{
+		color: #000;
+		&:hover{
+			text-decoration: none;
+		}
+	}
+	width: 220px;
+	height: 250px;
+	float: left;
+	padding: 10px;
+	border: 1px solid #000;
+	margin: 10px;
+	ul{
+		padding-left: 17px;
+		overflow: auto;
+	}
+	&:hover{
+		background-color: $lightGray;
+	}
+}
+.destroy_link{
+	float: left;
+	top: 10px;
+	position: relative;
+}

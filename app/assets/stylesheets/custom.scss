@@ -1,0 +1,180 @@
+@import "bootstrap";
+
+$lightGray: #999;
+$black: #000;
+$white: #fff;
+$railsRed: #d3360b;
+
+
+.navbar{
+  background-color: $railsRed;
+  min-height: inherit;
+  ul{
+    li{
+      float: right;
+
+      a{
+        color: $white;
+        font-weight: normal; 
+        &:hover{
+          color: #000000;
+        }
+      }
+    }
+  }
+  img{
+    margin-top: 6px;
+    height: 25px;
+  }
+}
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+  text-align: left;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  font-weight: normal;
+  color: $lightGray;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* footer */
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+/* forms */
+
+table{
+  margin-bottom: 20px;
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+label {
+  width: 100%;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+}
+.ui-dform-radiobuttons{
+  .ui-dform-radio{
+    width: auto;
+    float: left;
+    margin: 0 20px 0 0;
+  }
+  .ui-dform-label{
+    display: block;
+    font-weight: normal;
+    line-height: 1em;
+    margin: 10px 0 10px 0;
+  }
+}
+
+.ui-dform-submit{
+  width: auto;
+}
+
+tr:hover {
+  background: #f9f9f9;
+}
+
+thead {
+  tr {
+    background: #efefef;
+    &:hover {
+      background: #efefef;
+    }
+    th.settings {
+      color: $lightGray;
+      background-color: #fff;
+      padding-left: 5px;
+    }
+  }
+  td {
+    border: 1px solid white;
+  }
+}
+
+td {
+  padding: 5px 10px;
+}
+
+.textlist{
+  padding-left: 0px;
+  li{
+    display: list-item;
+    list-style-position: inside;
+    list-style-type: disc;
+    float: none;
+  }
+}
+
+
+

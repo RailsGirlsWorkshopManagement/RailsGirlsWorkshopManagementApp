@@ -1,0 +1,54 @@
+
+<div id="structure_forms" style="display:none">
+  
+  <div class="structure text">
+  </div>
+
+  <div class="structure textarea">
+  </div>
+
+  <div class="structure checkbox">
+  </div>
+
+  <div class="structure radiobuttons">
+    
+    <a href="" class="add_option">Add Option</a>
+    <input style="display:none;" type="text" name="options" value='{"yes":"Yes","no":"No"}'>
+  </div>
+
+</div>
+
+
+<h2>Add Form Element</h2>
+<form id="add_structure">
+
+  <select name="type" id="type">
+    <option value="text">Text</option>
+    <option value="checkbox">Checkbox</option>
+    <option value="radiobuttons">Radiobutton</option>
+    <option value="textarea">Textarea</option>
+  </select>
+
+  <label for="caption">Caption</label>
+  <input type="text" name="caption" id="caption" required>
+
+  <div id="current_structure_form">
+  </div>
+
+  <button type="submit" class="submit">add to structure</button>
+</form>
+
+<h2>Form Preview</h2>
+<form id="form_preview" class="editable"></form>
+
+
+<%= form_for(@form) do |f| %>
+  <%= hidden_field(:form, :structure) %>
+
+  <input name="form[type]" type="hidden" value="<%= params["type"] || @form._type %>" />
+  <input name="form[workshop_id]" type="hidden" value="<%= @form.workshop_id || params["workshop_id"] %>" />
+  <div class="actions">
+    <%= f.submit "Save Form" %>
+  </div>
+<% end %>
+

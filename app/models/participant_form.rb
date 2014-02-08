@@ -1,0 +1,3 @@
+class ParticipantForm < Form
+
+end

@@ -1,0 +1,35 @@
+<h1>Listing workshops</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Venue</th>
+      <th class="settings">Edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @workshops.each do |workshop| %>
+      <tr>
+        <%= link_to edit_workshop_path(workshop), :title=>"Edit" do %>
+          <td><%= link_to workshop.name, edit_workshop_path(workshop) %></td>
+          <td><%= workshop.date %></td>
+          <td><%= workshop.description %></td>
+          <td><%= workshop.venue %></td>
+          <td>
+        <% end %>
+            <%= link_to edit_workshop_path(workshop), :title=>"Edit" do %><i class="fa fa-pencil"></i><% end %>
+            <%= link_to workshop, method: :delete, data: { confirm: 'Are you sure?' }, :title=>"Destroy" do %><i class="fa fa-trash-o"></i>
+            <% end %>
+          </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Workshop', new_workshop_path %>

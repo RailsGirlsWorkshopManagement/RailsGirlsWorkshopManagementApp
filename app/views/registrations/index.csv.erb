@@ -1,0 +1,33 @@
+<%-participant_headers = []
+if (@participant_registrations.first != nil) && (!@participant_structure.blank?)
+    @participant_structure.each do |element|
+    	participant_headers.push(element['caption'])
+    end
+end-%>
+<%=CSV.generate_line(participant_headers).strip %>
+
+<%- @participant_registrations.each do |registration|
+  participant_row =[]
+  @participant_structure.each do |element|
+    participant_row.push(registration["attributes"][element["name"]])
+  end-%>
+  <%=CSV.generate_line(participant_row).strip %>
+<% end %>
+
+<%-coach_headers = []
+if (@coach_registrations.first != nil) && (!@coach_structure.blank?)
+    @coach_structure.each do |element|
+    	coach_headers.push(element['caption'])
+    end
+end-%>
+<%=CSV.generate_line(coach_headers).strip %>
+
+<%- @coach_registrations.each do |registration|
+  coach_row =[]
+  @coach_structure.each do |element|
+    coach_row.push(registration["attributes"][element["name"]])
+  end-%>
+  <%=CSV.generate_line(coach_row).strip %>
+<% end %>
+
+

@@ -1,0 +1,30 @@
+<%= form_tag "/workshops/"+params[:id]+"/manual_mail_send" do %>
+
+<h2>You can use the following tags within the email-body:</h2>
+<ul class="textlist">
+  <li><p>[workshop_name]</p></li>
+  <li><p>[workshop_description]</p></li>
+  <li><p>[workshop_date]</p></li>
+  <li><p>[workshop_venue]</p></li>
+</ul>
+
+  <%= label_tag "name for future reuse"%>
+  <%= text_field_tag "name"%>
+  <%= label_tag "Receipments"%>
+  <span>all admins in bcc</span>
+  <%= check_box_tag 'admins', '1'%>
+  <span>all participants in bcc</span>
+  <%= check_box_tag 'participants', '1'%>
+  <span>all coaches in bcc</span>
+  <%= check_box_tag 'coaches', '1'%>
+  <span>all accepted participants in bcc</span>
+  <%= check_box_tag 'participants_accepted', '1'%>
+  <span>all rejected participants in bcc</span>
+  <%= check_box_tag 'participants_rejected', '1'%>
+
+  <%= label_tag "email subject"%>
+  <%= text_field_tag "subject"%>
+  <%= label_tag "email text"%>
+  <%= text_area_tag "text"%>
+  <%= submit_tag "Send" %>
+<% end %>

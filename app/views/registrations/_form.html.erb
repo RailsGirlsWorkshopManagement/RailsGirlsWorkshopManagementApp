@@ -1,0 +1,35 @@
+<!-- Edit doesn't work.-->
+
+<script type="text/javascript">
+  form = {
+    "action" : "/registrations",
+    "method" : "post",
+    "html": []
+  }
+  structure_to_render = <%= @form.structure.html_safe %>;
+  structure_to_render.push({
+      "type" : "submit",
+      "value" : "Register"
+  });
+  structure_to_render.push({
+    "type": "hidden",
+    "name": "authenticity_token",
+    "value": "<%= form_authenticity_token %>"
+  });
+  structure_to_render.push({
+    "type": "hidden",
+    "name": "form_id",
+    "value": "<%= @form.id %>"
+  });
+</script>
+<form id="form_preview"></form>
+
+<% if @registration != nil
+   @registration.attributes.each do |attr_name, attr_value| %>
+    <% if attr_name != 'form_id' and attr_name != '_id' and attr_name != 'action' and attr_name != 'controller' and attr_name != 'authenticity_token' and attr_name != 'form_type' %>
+        <script type="text/javascript">
+          $("input[name="'<% attr_name %>'"].val("'<% attr_value %>'")");
+        </script>
+    <% end %>
+  <% end %>
+<% end %>

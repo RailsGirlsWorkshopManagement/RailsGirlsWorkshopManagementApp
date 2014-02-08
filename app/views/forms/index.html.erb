@@ -1,0 +1,41 @@
+<%
+  i = 0
+%>
+<%= link_to "Back to Workshop", edit_workshop_path(@workshop) %>
+<h1>Listing forms</h1>
+
+<% @forms.each do |form| %>
+  <%= link_to form_path(form, :workshop_id=>params[:workshop_id], :type=>params[:type]), :class => "form_preview_card", :title=>"Show Participant Form" do %><div>
+    <strong>Previously used for:</strong><br>
+    <span>Name: <%=@workshop.name%></span><br>
+    <span>Date: <%=@workshop.date%></span><br>
+    <ul>
+      <% if @structure[i].count >= 4 %>
+        <li><%=@structure[i][3]["caption"][0..45]%>
+        <%if @structure[i][3]["caption"].length > 45%>
+            ...
+        <%end%>
+        </li>
+      <% end %>
+      <% if @structure[i].count >= 5 %>
+        <li><%=@structure[i][4]["caption"][0..45]%>
+        <%if @structure[i][4]["caption"].length > 45%>
+            ...
+        <%end%>
+        </li>
+      <% end %>
+      <% if @structure[i].count >= 6 %>
+        <li><%=@structure[i][5]["caption"][0..45]%>
+        <%if @structure[i][5]["caption"].length > 45%>
+            ...
+        <%end%>
+        </li>
+      <% end %>
+    </ul>
+    <span>Form has <%=@structure[i].count%> inputfields.</span>
+  </div>
+  <% end %>
+  <% i+=1 %>
+<% end %>
+
+

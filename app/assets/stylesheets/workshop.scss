@@ -1,0 +1,46 @@
+// Place all the styles related to the Workshop controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.workshop_show_form_box {
+	width: 500px;
+	height: 600px;
+	float: right;
+	border: solid 1px;
+	margin-top: 50px;
+}
+
+.coachBox {
+	height: 300px;
+	width: 100%;
+	padding: 25px;
+	border-top: solid 1px;
+}
+
+.participant_box {
+	padding: 25px;
+	height: 300px;
+}
+
+
+.edit_workshop {
+	width: 500px;
+	margin-top: 75px;
+	border: solid 1px;
+	padding: 25px;
+	margin-bottom: 20px;
+}
+
+
+#workshop_navi {
+position: absolute;
+right: 200px;
+top: 60px;
+}
+
+.workshop_show_mail_box {
+	width: 500px;
+	height: 197px;
+	border: solid 1px;
+	padding: 25px;
+}

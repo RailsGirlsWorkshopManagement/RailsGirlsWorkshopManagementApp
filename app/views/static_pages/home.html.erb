@@ -1,0 +1,25 @@
+<div class="center hero-unit">
+	<h1><%= settings.frontPageSlogan %></h1>
+	<h2><%= settings.frontPageDescription %></h2>
+</div>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Date</th>
+			<th>Venue</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @workshops.each do |workshop| %>
+			<tr>
+				<td><%=workshop.name%></td>
+				<td><%=workshop.description%></td>
+				<td><%=workshop.date%></td>
+				<td><%=workshop.venue%></td>
+				<td><%= link_to "Register now!", new_registration_path(:workshop_id=>workshop.id), class: "btn btn-large btn-primary" %></td>
+			</tr>
+	<%end%>
+	</tbody>
+</table>

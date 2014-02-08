@@ -10,7 +10,7 @@
 <% end %>
 
 <% if not params[:workshop_id] %>
-	<%= link_to 'Back to workshop', edit_workshop_path(@form.workshop) %>
+	<%= link_to 'Back to workshop', edit_workshop_path(@form.workshop), :id=>"back_to_workshop" %>
 <% else %>
 	<%= link_to 'Show all forms', forms_path(:type=>params[:type], :workshop_id=>params[:workshop_id]) %>
 <% end %>

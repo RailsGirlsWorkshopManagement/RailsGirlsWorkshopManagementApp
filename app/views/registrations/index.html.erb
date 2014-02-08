@@ -16,17 +16,12 @@
 </div>
 
 <div id="list_registrations">
-    <a id="maximize_all"><i class="fa fa-plus"></i> maximize all</a>
-    <br>
-    <a id="minimize_all"><i class="fa fa-minus"></i> maximize all</a>
     <table>
       <thead>
         <tr>
           <% if (@participant_registrations.first != nil) && (!@participant_structure.blank?)%>
-            <%index= 0%>
             <% @participant_structure.each do |element| %>
-              <td data-id=<%=index%> title="<%= element['caption']%>" ><strong> <%= element['caption']%> </strong></td>
-              <%index += 1%>
+              <td><strong> <%= element['caption']%> </strong></td>
             <% end %>
               <td><strong>Accept</strong></td>
               <td><strong>Cancled</strong></td>
@@ -37,12 +32,8 @@
       <tbody>
         <% @participant_registrations.each do |registration| %>
           <tr class="<%= registration["attributes"]["cancled"] ? "cancledRegistration" : "" %>">
-            <% index = 0%>
             <% @participant_structure.each do |element| %>
-              <td data-id=<%=index%>>
-                <span><%= registration["attributes"][element["name"]] %></span>
-              </td>
-              <%index += 1%>
+              <td><%= registration["attributes"][element["name"]] %></td>
             <% end %>
 
             <td>
@@ -74,10 +65,8 @@
       <thead>
         <tr>
           <% if (@coach_registrations.first != nil) && (!@coach_structure.blank?)%>
-            <%index= 0%>
             <% @coach_structure.each do |element| %>
-              <td data-id=<%=index%> title="<%= element['caption']%>" ><strong> <%= element['caption']%> </strong></td>
-              <%index += 1%>
+              <td><strong> <%= element['caption']%> </strong></td>
             <% end %>
           <% end %>
         </tr>
@@ -85,12 +74,8 @@
       <tbody>
         <% @coach_registrations.each do |registration| %>
           <tr>
-            <%index= 0%>
             <% @coach_structure.each do |element| %>
-              <td data-id=<%=index%>>
-                <span><%= registration["attributes"][element["name"]] %></span>
-              </td>
-              <%index += 1%>
+              <td><%= registration["attributes"][element["name"]] %></td>
             <% end %>
             <td><%= link_to 'Destroy', registration_path(registration["id"]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>

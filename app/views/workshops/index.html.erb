@@ -1,35 +1,41 @@
-<h1>Listing workshops</h1>
+<h1 id="test">Listing workshops</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Date</th>
-      <th>Description</th>
-      <th>Venue</th>
-      <th class="settings">Edit</th>
-    </tr>
-  </thead>
+<% if @workshops.length > 0 %>
 
-  <tbody>
-    <% @workshops.each do |workshop| %>
+  <table>
+    <thead>
       <tr>
-        <%= link_to edit_workshop_path(workshop), :title=>"Edit" do %>
-          <td><%= link_to workshop.name, edit_workshop_path(workshop) %></td>
-          <td><%= workshop.date %></td>
-          <td><%= workshop.description %></td>
-          <td><%= workshop.venue %></td>
-          <td>
-        <% end %>
-            <%= link_to edit_workshop_path(workshop), :title=>"Edit" do %><i class="fa fa-pencil"></i><% end %>
-            <%= link_to workshop, method: :delete, data: { confirm: 'Are you sure?' }, :title=>"Destroy" do %><i class="fa fa-trash-o"></i>
-            <% end %>
-          </td>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Venue</th>
+        <th class="settings">Edit</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @workshops.each do |workshop| %>
+        <tr>
+          <%= link_to edit_workshop_path(workshop), :title=>"Edit" do %>
+            <td><%= link_to workshop.name, edit_workshop_path(workshop) %></td>
+            <td><%= workshop.date %></td>
+            <td><%= workshop.description %></td>
+            <td><%= workshop.venue %></td>
+            <td>
+          <% end %>
+              <%= link_to edit_workshop_path(workshop), :title=>"Edit" do %><i class="fa fa-pencil"></i><% end %>
+              <%= link_to workshop, method: :delete, data: { confirm: 'Are you sure?' }, :title=>"Destroy" do %><i class="fa fa-trash-o"></i>
+              <% end %>
+            </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Workshop', new_workshop_path %>
+<% else %>
+  <div>You don't have any workshops yet. Please create one.</div>
+<% end %>
+
+<%= link_to 'New Workshop', new_workshop_path, :id=>"new_workshop_link" %><br><br>
+
+<a href="" id="start_tour_main">Start Tour</a>

@@ -13,7 +13,8 @@ class MailTemplatesController < ApplicationController
   def update
     @mail_template = MailTemplate.find_by_id(params[:id])
     if @mail_template.update_attributes(mail_template_params)
-      redirect_to edit_workshop_path(@mail_template.workshop), notice: 'Workshop was successfully updated.'
+      flash[:success] = "Workshop was successfully updated."
+      redirect_to edit_workshop_path(@mail_template.workshop)
     else
       render action: 'edit'
     end
@@ -27,7 +28,10 @@ class MailTemplatesController < ApplicationController
 
     def signed_in_user
       store_location
-      redirect_to admin_path, notice: "Only for Admins available! Please sign in." unless signed_in?
+      unless signed_in?
+        flash[:success] = "Only for Admins available! Please sign in."
+        redirect_to admin_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

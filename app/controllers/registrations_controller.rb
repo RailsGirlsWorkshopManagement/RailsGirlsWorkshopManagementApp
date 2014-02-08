@@ -127,7 +127,8 @@ class RegistrationsController < ApplicationController
   def update
     @registration = Registration.find_by_id(params[:id])
     if @form.update_attributes(registration_params)
-      redirect_to @registration, notice: 'Registration was successfully updated.'
+      flash[:success] = "Registration was successfully updated."
+      redirect_to @registration
     else
       render action: 'edit'
     end
@@ -165,7 +166,8 @@ class RegistrationsController < ApplicationController
       r.accepted = false
       r.save
     end
-    redirect_to :back, notice: 'Registrations successfully accepted.'
+    flash[:success] = "Registrations successfully accepted."
+    redirect_to :back
   end
 
   def cancel
@@ -204,7 +206,10 @@ class RegistrationsController < ApplicationController
     # Before filters
     def signed_in_user
       store_location
-      redirect_to admin_path, notice: "Only for Admins available! Please sign in." unless signed_in?
+      unless signed_in?
+        flash[:success] = "Only for Admins available! Please sign in."
+        redirect_to admin_path
+      end
     end
 
     def correct_user

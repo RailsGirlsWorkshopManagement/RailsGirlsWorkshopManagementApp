@@ -14,9 +14,11 @@ class WorkshopsController < ApplicationController
     if (@workshop.participant_form != nil)
       @workshop.published = true
       @workshop.save
-      redirect_to home_path, notice: 'Workshop was successfully published.'
+      flash[:success] = "Workshop was successfully published."
+      redirect_to home_path
     else
-      redirect_to edit_workshop_path(@workshop), notice: 'Workshop could not be published. Please create a participant form!'
+      flash[:error] = "Workshop could not be published. Please create a participant form!"
+      redirect_to edit_workshop_path(@workshop)
     end
   end
 
@@ -24,7 +26,8 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.find(params[:id])
     @workshop.published = false
     @workshop.save
-    redirect_to edit_workshop_path(@workshop), notice: 'Workshop was successfully unpublished.'
+    flash[:success] = "Workshop was successfully unpublished."
+    redirect_to edit_workshop_path(@workshop)
   end
 
   def addForm
@@ -40,9 +43,11 @@ class WorkshopsController < ApplicationController
     @form.workshop = @workshop
     @form.structure = @existing_form.structure
     if @form.save
-      redirect_to edit_form_path(@form), notice: 'Workshop was successfully updated.'
+      flash[:success] = "Workshop was successfully updated."
+      redirect_to edit_form_path(@form)
     else
-      redirect_to edit_workshop_path(@workshop), notice: 'Could not update Workshop.'
+      flash[:error] = "Could not update Workshop."
+      redirect_to edit_workshop_path(@workshop)
     end
   end
 
@@ -55,7 +60,8 @@ class WorkshopsController < ApplicationController
     mail_template.workshop = Workshop.find(params[:id])
 
     RegistrationMailer.manual_email(mail_template, get_receiptments_from_params(params)).deliver
-    redirect_to edit_workshop_path(mail_template.workshop), notice: 'E-Mail was successfully sent.'
+    flash[:success] = "E-Mail was successfully sent."
+    redirect_to edit_workshop_path(mail_template.workshop)
   end
 
   # GET /workshops/new
@@ -74,7 +80,8 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.new(workshop_params)
     standard_mail_template = MailTemplate.create(:workshop_id => @workshop.id)
     if @workshop.save
-      redirect_to edit_workshop_path(@workshop), notice: 'Workshop was successfully created.'
+      flash[:success] = "Workshop was successfully created."
+      redirect_to edit_workshop_path(@workshop)
     else
       render action: 'new'
     end
@@ -83,7 +90,8 @@ class WorkshopsController < ApplicationController
   # PATCH/PUT /workshops/1
   def update
     if @workshop.update_attributes(workshop_params)
-      redirect_to edit_workshop_path(@workshop), notice: 'Workshop was successfully updated.'
+      flash[:success] = "Workshop was successfully updated."
+      redirect_to edit_workshop_path(@workshop)
     else
       render action: 'edit'
     end
@@ -92,7 +100,8 @@ class WorkshopsController < ApplicationController
   # DELETE /workshops/1
   def destroy
     @workshop.destroy
-    redirect_to workshops_url, notice: 'Workshop was successfully destroyed.'
+    flash[:success] = "Workshop was successfully destroyed."
+    redirect_to workshops_url
   end
 
   private
@@ -104,7 +113,10 @@ class WorkshopsController < ApplicationController
     # Before filters
     def signed_in_user
       store_location
-      redirect_to admin_path, notice: "Only for Admins available! Please sign in." unless signed_in?
+      unless signed_in?
+        flash[:error] = "Only for Admins available! Please sign in."
+        redirect_to admin_path
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

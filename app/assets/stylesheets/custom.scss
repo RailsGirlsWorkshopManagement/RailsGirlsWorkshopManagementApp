@@ -176,5 +176,14 @@ td {
   }
 }
 
+.alert-error {
+  background-color: #FFC6C6;
+  border-color: #FFA3A3;
+  color: #992828; }
+  .alert-error hr {
+    border-top-color: #992828; }
+  .alert-error .alert-link {
+    color: #2b542c; }
+
 
 

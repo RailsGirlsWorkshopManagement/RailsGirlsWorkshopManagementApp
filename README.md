@@ -60,7 +60,6 @@ $ heroku login
 $ heroku create app-name --addons mongohq
 ```
 
-  * from now on you can find your app under the following url: http://app-name.herokuapp.com/
 
 3. Create git remote
   * add the following in ".git/config" (the folder .git is normally hidden so change your preferences if you can't find in)

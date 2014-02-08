@@ -211,7 +211,11 @@ MainTour.prototype.getMainSteps = function() {
 			content: "Please fill out the form and click 'Create Workshop' to submit the data",
 			onShown: function() {
 				$("form#new_workshop").on('submit', function() {
-					_this.tour.goTo(_this.tour.getCurrentStep()+2);
+					if($('#workshop_name').val() !== '' &&
+						$('#workshop_description').val() !== '' &&
+							$('#workshop_venue').val() !== '') {
+						_this.tour.goTo(_this.tour.getCurrentStep()+2);
+					}
 				});
 			},
 			onHide: function() {
@@ -226,8 +230,15 @@ MainTour.prototype.getMainSteps = function() {
 			title: "Ready to continue?",
 			content: "Have you entered all the requiered information? Perfect! Let's go on.",
 			onNext: function() {
-				$("form#new_workshop").trigger('submit');
-				//_this.tour.goTo(4);
+				if($('#workshop_name').val() === '' ||
+						$('#workshop_description').val() === '' ||
+							$('#workshop_venue').val() === '') {
+					setTimeout(function() {
+						_this.tour.goTo(_this.tour.getCurrentStep()-1);
+					}, 10);
+				} else {
+					$("form#new_workshop").submit();
+				}
 			},
 			reflex: true,
 			backdrop: true
@@ -247,7 +258,7 @@ MainTour.prototype.getMainSteps = function() {
 			element: "form.edit_workshop",
 			placement: "right",
 			title: "Workshop Details",
-			content: "This box gives you an overviwe of your workshop details. You can always update the fields by clicking 'Update Workshop'.",
+			content: "This box gives you an overview of your workshop details. You can always update the fields by clicking 'Update Workshop'.",
 			backdrop: true
 		},
 		{

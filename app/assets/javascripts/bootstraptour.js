@@ -1,9 +1,8 @@
 var currentTour;
 $(function() {
 	currentTour = new MainTour();
-	currentTour.init();
 
-	if(!currentTour.tour.ended() && currentTour.tour.getCurrentStep()) {
+	if((!currentTour.tour.ended() && currentTour.tour.getCurrentStep()) || false) {
 		var currentPath = document.location.pathname;
 		var path_splitted = currentPath.split('/');
 		if(path_splitted.length > 2) {
@@ -22,34 +21,33 @@ $(function() {
 
 	$('#start_tour_main').click(function(e) {
 		e.preventDefault();
-		currentTour.start();
+		currentTour.start("main");
 	});
+	$('#start_tour_add_form').click(function(e) {
+		e.preventDefault();
+		currentTour.start("add_form");
+	});
+	// $('#start_tour_use_form').click(function(e) {
+	// 	e.preventDefault();
+	// 	currentTour.start("use_form");
+	// });
+	// $('#start_tour_email').click(function(e) {
+	// 	e.preventDefault();
+	// 	currentTour.start("email");
+	// });
 });
 
 function MainTour() {
 	var _this = this;
 
-	// Instance the tour
-	_this.tour = new Tour({
-		name: 'main',
-		debug: true,
-		orphan: true,
-		redirect: function(path) {
-			_this.redirect(path);
-		},
-		onEnd: function() {
-			if('workshop_id' in localStorage) {
-				localStorage.removeItem('workshop_id');
-			}
-
-			if('form_id' in localStorage) {
-				localStorage.removeItem('form_id');
-			}
-		}
-	});
-
-	// Add your steps. Not too many, you don't really want to get your users sleepy
-	_this.tour.addSteps(_this.getSteps());
+	if("tourname" in localStorage) {
+		var tourname = localStorage.getItem('tourname');
+		_this.loadSteps(tourname);
+		_this.init();
+	} else {
+		_this.loadSteps("main");
+		_this.init();
+	}
 }
 
 MainTour.prototype.redirect = function(path) {
@@ -91,8 +89,67 @@ MainTour.prototype.init = function() {
 	_this.tour.init();
 };
 
-MainTour.prototype.start = function() {
+MainTour.prototype.loadSteps = function(tourname) {
 	var _this = this;
+
+	// Instance the tour
+	_this.tour = new Tour({
+		name: tourname,
+		debug: true,
+		orphan: true,
+		redirect: function(path) {
+			_this.redirect(path);
+		},
+		onEnd: function() {
+			if('workshop_id' in localStorage) {
+				localStorage.removeItem('workshop_id');
+			}
+
+			if('form_id' in localStorage) {
+				localStorage.removeItem('form_id');
+			}
+		}
+	});
+
+	switch(tourname) {
+		case "main":
+			_this.tour.addSteps(_this.getMainSteps());
+			_this.tour.addSteps(_this.getAddFormSteps());
+			// _this.tour.addSteps(_this.getSteps());
+			break;
+		case "add_form":
+			_this.tour.addSteps(_this.getAddFormSteps());
+			break;
+		// case "use_form":
+		// 	_this.tour.addSteps(_this.getUseFormSteps());
+		// 	break;
+		// case "email":
+		// 	_this.tour.addSteps(_this.getEmailSteps());
+		// 	break;
+	}
+};
+
+MainTour.prototype.start = function(tourname) {
+	var _this = this;
+
+	var currentPath = document.location.pathname;
+	var path_splitted = currentPath.split('/');
+	if(path_splitted.length > 2) {
+		if(path_splitted[1] === "forms" && path_splitted[2] !== "" && typeof path_splitted[2] !== "undefined" && path_splitted[2] !== "new") {
+			localStorage.setItem('form_id', path_splitted[2]);
+		}
+	}
+	var workshop_form = $('form.edit_workshop');
+	if(workshop_form.length > 0) {
+		var workshop_id = workshop_form.attr('id').replace('edit_workshop_', '');
+		if(workshop_id !== '') {
+			localStorage.setItem('workshop_id', workshop_id);
+		}
+	}
+
+
+	localStorage.setItem('tourname', tourname);
+	_this.loadSteps(tourname);
 
 	_this.init();
 	_this.tour.start();
@@ -102,15 +159,33 @@ MainTour.prototype.start = function() {
 	}
 };
 
-MainTour.prototype.setWorkshopID = function(id) {
-	localStorage.setItem('workshop_id', id);
-};
+// MainTour.prototype.getEmailSteps = function() {
+// 	var _this = this;
+// 	return [
+// 		{
+// 			path: "/workshops/{{workshop_id}}/edit",
+// 			element: "div.workshop_show_mail_box",
+// 			placement: "right",
+// 			title: "E-Mail configuration",
+// 			content: "",
+// 			backdrop: true
+// 		}
+// 	];
+// };
 
-MainTour.prototype.getWorkshopID = function() {
-	return localStorage.getItem('workshop_id');
-};
+// MainTour.prototype.getUseFormSteps = function() {
+// 	var _this = this;
+// 	return [
+// 		{
+// 			path: "/workshops",
+// 			title: "Welcome to the Rails Girls Workshop Manamement App",
+// 			content: "Learn about the functionality of this app in just a few steps!",
+// 			backdrop: true
+// 		}
+// 	];
+// };
 
-MainTour.prototype.getSteps = function() {
+MainTour.prototype.getMainSteps = function() {
 	var _this = this;
 	return [
 		{
@@ -136,7 +211,7 @@ MainTour.prototype.getSteps = function() {
 			content: "Here you can just fill in the workshop information and continue by clicking on 'Create Workshop'",
 			onShown: function() {
 				$("form#new_workshop").on('submit', function() {
-					_this.tour.goTo(4);
+					_this.tour.goTo(_this.tour.getCurrentStep()+2);
 				});
 			},
 			onHide: function() {
@@ -163,7 +238,7 @@ MainTour.prototype.getSteps = function() {
 			title: "Workshop Dashboard",
 			content: "You created your first workshop. On this page you can configure everything you need for the workshop.",
 			onShown: function() {
-				$('#step-4.popover.tour-main .btn-group .btn').eq(0).prop('disabled', true);
+				$('#step-'+_this.tour.getCurrentStep()+'.popover .btn-group .btn').eq(0).prop('disabled', true);
 			},
 			backdrop: true
 		},
@@ -183,7 +258,7 @@ MainTour.prototype.getSteps = function() {
 			onShown: function() {
 				$("div.workshop_show_mail_box").on('click', function(e) {
 					e.preventDefault();
-					_this.tour.goTo(7);
+					_this.tour.goTo(_this.tour.getCurrentStep()+1);
 				});
 			},
 			onHide: function() {
@@ -201,7 +276,7 @@ MainTour.prototype.getSteps = function() {
 			onShown: function() {
 				$("div.workshop_show_mail_box").on('click', function(e) {
 					e.preventDefault();
-					_this.tour.goTo(7);
+					_this.tour.goTo(_this.tour.getCurrentStep());
 				});
 			},
 			onHide: function() {
@@ -217,7 +292,7 @@ MainTour.prototype.getSteps = function() {
 			placement: "left",
 			onShown: function() {
 				$("div.workshop_show_form_box #add_participant_form").on('click', function() {
-					_this.tour.goTo(10);
+					_this.tour.goTo(_this.tour.getCurrentStep()+1);
 				});
 			},
 			onHide: function() {
@@ -226,7 +301,14 @@ MainTour.prototype.getSteps = function() {
 			title: "Workshop Forms",
 			content: "here you can easily add forms which participants or coaches can use to register for your workshop.",
 			backdrop: true
-		},
+		}
+	];
+};
+
+
+MainTour.prototype.getAddFormSteps = function() {
+	var _this = this;
+	return [
 		{
 			path: "/workshops/{{workshop_id}}/edit",
 			element: "div.workshop_show_form_box #add_participant_form",
@@ -271,7 +353,7 @@ MainTour.prototype.getSteps = function() {
 			placement: "bottom",
 			title: "Your form",
 			onShown: function() {
-				$('#step-13.popover.tour-main .btn-group .btn').eq(0).prop('disabled', true);
+				$('#step-'+_this.tour.getCurrentStep()+'.popover .btn-group .btn').eq(0).prop('disabled', true);
 			},
 			content: "This is how your form will look like for users",
 		},
@@ -281,6 +363,15 @@ MainTour.prototype.getSteps = function() {
 			placement: "right",
 			title: "Go Back",
 			content: "Click here to go back to your workshop dashboard",
+			backdrop: true,
+			reflex: true
+		},
+		{
+			path: "/workshops/{{workshop_id}}/edit",
+			element: "div.workshop_show_form_box",
+			placement: "left",
+			title: "Successfully added a new form",
+			content: "Here you can get the link for your form or edit it",
 			backdrop: true,
 			reflex: true
 		},

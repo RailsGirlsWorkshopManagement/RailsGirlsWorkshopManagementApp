@@ -198,7 +198,7 @@ MainTour.prototype.getMainSteps = function() {
 			path: "/workshops",
 			element: "#new_workshop_link",
 			placement: "right",
-			title: "Creating a new workshop",
+			title: "Create a new workshop",
 			content: "Let's start with creating a new workshop by clicking on the link 'New Workshop'",
 			reflex: true,
 			backdrop: true
@@ -207,8 +207,8 @@ MainTour.prototype.getMainSteps = function() {
 			path: "/workshops/new",
 			element: "form#new_workshop",
 			placement: "top",
-			title: "Configure you workshop",
-			content: "Here you can just fill in the workshop information and continue by clicking on 'Create Workshop'",
+			title: "Specify the details of your Workshop",
+			content: "Please fill out the form and click 'Create Workshop' to submit the data",
 			onShown: function() {
 				$("form#new_workshop").on('submit', function() {
 					_this.tour.goTo(_this.tour.getCurrentStep()+2);
@@ -224,7 +224,7 @@ MainTour.prototype.getMainSteps = function() {
 			element: "form#new_workshop input[type='submit']",
 			placement: "bottom",
 			title: "Ready to continue?",
-			content: "Have you filled all the input fields? Perfect! Let's go on.",
+			content: "Have you entered all the requiered information? Perfect! Let's go on.",
 			onNext: function() {
 				$("form#new_workshop").trigger('submit');
 				//_this.tour.goTo(4);
@@ -236,7 +236,7 @@ MainTour.prototype.getMainSteps = function() {
 			path: "/workshops/{{workshop_id}}/edit",
 			placement: "bottom",
 			title: "Workshop Dashboard",
-			content: "You created your first workshop. On this page you can configure everything you need for the workshop.",
+			content: "You created your first workshop. On this page you can manage everything regarding your workshop.",
 			onShown: function() {
 				$('#step-'+_this.tour.getCurrentStep()+'.popover .btn-group .btn').eq(0).prop('disabled', true);
 			},
@@ -247,7 +247,7 @@ MainTour.prototype.getMainSteps = function() {
 			element: "form.edit_workshop",
 			placement: "right",
 			title: "Workshop Details",
-			content: "In this box you find all the workshop related data and you are able to update it.",
+			content: "This box gives you an overviwe of your workshop details. You can always update the fields by clicking 'Update Workshop'.",
 			backdrop: true
 		},
 		{
@@ -265,7 +265,7 @@ MainTour.prototype.getMainSteps = function() {
 				$("div.workshop_show_mail_box").off();
 			},
 			next: 8,
-			content: "Want to change the e-mail confirmation your participants will get or want to send an e-mail to groups of your participants? Here you find everything you need.",
+			content: "Everyone who registers through your site will receive an e-mail confirmation. Don't worry, you are on copy. Change the template or send E-Mails to your participants and coaches.",
 			backdrop: true
 		},
 		{
@@ -299,7 +299,7 @@ MainTour.prototype.getMainSteps = function() {
 				$("div.workshop_show_form_box #add_participant_form").off();
 			},
 			title: "Workshop Forms",
-			content: "here you can easily add forms which participants or coaches can use to register for your workshop.",
+			content: "Create a individual registration form for coaches or participants. To save some time you can reuse and modify existing forms.",
 			backdrop: true
 		}
 	];
@@ -314,7 +314,7 @@ MainTour.prototype.getAddFormSteps = function() {
 			element: "div.workshop_show_form_box #add_participant_form",
 			placement: "bottom",
 			title: "Add a participant form",
-			content: "If you want to create a form to get required data from your workshop participants, click here",
+			content: "To create a participant form click here. Every question is required by default.",
 			onNext: function() {
 				$('div.workshop_show_form_box #add_participant_form').click();
 			},
@@ -326,15 +326,15 @@ MainTour.prototype.getAddFormSteps = function() {
 			element: "form#form_preview",
 			placement: "top",
 			title: "Preview of the form you are creating",
-			content: "Here you can see a preview of the form you are working on. These three fields are not removable, but you can rename them if neccessary.",
+			content: "These three fields are not removable, but you can rename them if neccessary.",
 			backdrop: true
 		},
 		{
 			path: "/forms/new?type=participant&workshop_id={{workshop_id}}",
 			element: "form#add_structure",
 			placement: "bottom",
-			title: "Add Elements",
-			content: "Use this box to add fields of the types you need in your form",
+			title: "Add Elements to your form",
+			content: "Choose an input field type (text, checkbox, radiobutton, texarea) and enter a question or caption.",
 			backdrop: true
 		},
 		{
@@ -345,24 +345,24 @@ MainTour.prototype.getAddFormSteps = function() {
 			onNext: function() {
 				$('form#new_form').submit();
 			},
-			content: "Click here to save the form and continue",
+			content: "Click here to save the form and continue.",
 			reflex: true
 		},
 		{
 			path: "/forms/{{form_id}}",
 			placement: "bottom",
-			title: "Your form",
+			title: "Congratulations to your fist participant form",
 			onShown: function() {
 				$('#step-'+_this.tour.getCurrentStep()+'.popover .btn-group .btn').eq(0).prop('disabled', true);
 			},
-			content: "This is how your form will look like for users",
+			content: "This is how your form will look like for users.",
 		},
 		{
 			path: "/forms/{{form_id}}",
 			element: "#back_to_workshop",
 			placement: "right",
-			title: "Go Back",
-			content: "Click here to go back to your workshop dashboard",
+			title: "Back to Workshop",
+			content: "Click here to go back to your workshop dashboard.",
 			backdrop: true,
 			reflex: true
 		},

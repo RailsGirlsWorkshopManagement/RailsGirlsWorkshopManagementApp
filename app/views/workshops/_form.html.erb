@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :required => true %>
   </div>
   <div class="field">
     <%= f.label :date %><br>
@@ -21,11 +21,11 @@
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :required => true %>
   </div>
   <div class="field">
     <%= f.label :venue %><br>
-    <%= f.text_area :venue %>
+    <%= f.text_area :venue, :required => true %>
   </div>
   <div class="actions">
     <%= f.submit %>

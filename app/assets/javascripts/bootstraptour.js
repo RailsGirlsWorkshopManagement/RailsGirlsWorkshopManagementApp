@@ -208,7 +208,7 @@ MainTour.prototype.getMainSteps = function() {
 			element: "form#new_workshop",
 			placement: "top",
 			title: "Specify the details of your Workshop",
-			content: "Please fill out the form and click 'Create Workshop' to submit the data",
+			content: "Please fill out the form and click 'Create Workshop' to submit the data.",
 			onShown: function() {
 				$("form#new_workshop").on('submit', function() {
 					if($('#workshop_name').val() !== '' &&
@@ -310,7 +310,7 @@ MainTour.prototype.getMainSteps = function() {
 				$("div.workshop_show_form_box #add_participant_form").off();
 			},
 			title: "Workshop Forms",
-			content: "Create a individual registration form for coaches or participants. To save some time you can reuse and modify existing forms.",
+			content: "Create an individual registration form for coaches or participants. To save some time you can reuse and modify existing forms.",
 			backdrop: true
 		}
 	];
@@ -325,7 +325,7 @@ MainTour.prototype.getAddFormSteps = function() {
 			element: "div.workshop_show_form_box #add_participant_form",
 			placement: "bottom",
 			title: "Add a participant form",
-			content: "To create a participant form click here. Every question is required by default.",
+			content: "To create a participant form click here.",
 			onNext: function() {
 				$('div.workshop_show_form_box #add_participant_form').click();
 			},
@@ -362,11 +362,11 @@ MainTour.prototype.getAddFormSteps = function() {
 		{
 			path: "/forms/{{form_id}}",
 			placement: "bottom",
-			title: "Congratulations to your fist participant form",
+			title: "Final form",
 			onShown: function() {
 				$('#step-'+_this.tour.getCurrentStep()+'.popover .btn-group .btn').eq(0).prop('disabled', true);
 			},
-			content: "This is how your form will look like for users.",
+			content: "This is what your form will look like to users.",
 		},
 		{
 			path: "/forms/{{form_id}}",
@@ -381,8 +381,8 @@ MainTour.prototype.getAddFormSteps = function() {
 			path: "/workshops/{{workshop_id}}/edit",
 			element: "div.workshop_show_form_box",
 			placement: "left",
-			title: "Successfully added a new form",
-			content: "Here you can get the link for your form or edit it",
+			title: "New form options available",
+			content: "Now you can edit the form you just created or get the registration link.",
 			backdrop: true,
 			reflex: true
 		},

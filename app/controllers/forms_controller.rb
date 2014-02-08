@@ -45,7 +45,8 @@ class FormsController < ApplicationController
     end
     @form.workshop_id = workshop_id
     if @form.save
-      redirect_to @form, notice: 'Form was successfully created.'
+      flash[:success] = "Form was successfully created."
+      redirect_to @form
     else
       render action: 'new'
     end
@@ -55,7 +56,8 @@ class FormsController < ApplicationController
   def update
     @form = Form.find_by_id(params[:id])
     if @form.update_attributes(form_params)
-      redirect_to @form, notice: 'Form was successfully updated.'
+      flash[:success] = "Form was successfully updated."
+      redirect_to @form
     else
       render action: 'edit'
     end
@@ -68,7 +70,8 @@ class FormsController < ApplicationController
       @form.workshop.published = false
       @form.workshop.save
     end
-    redirect_to :back, notice: 'Form was successfully destroyed. Due to this, the corresponding Workshop is no longer published'
+    flash[:success] = "Form was successfully destroyed. Due to this, the corresponding Workshop is no longer published"
+    redirect_to :back
   end
 
   private

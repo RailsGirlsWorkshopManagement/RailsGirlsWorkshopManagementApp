@@ -45,18 +45,18 @@ Password: rgdemo14
 
 What to do:
 1. Download Project
-..* open your terminal
-..* go to the directory you want to create the project by using >$ cd
-..* run the following command to download the repository:
+  * open your terminal
+  * go to the directory you want to create the project by using >$ cd
+  * run the following command to download the repository:
 	>$ git clone git@github.com:RailsGirlsWorkshopManagement/RailsGirlsWorkshopManagementApp.git
 
 2.
-..*run the following commands to login to your heroku accound and create your app:
-	>$ heroku login
+  * run the following commands to login to your heroku accound and create your app:
+	> $ heroku login
 	enter heroku credentials and generate a public key if non-existing
-	>$ heroku create app-name --addons mongohq
+	> $ heroku create app-name --addons mongohq
 
-..*from now on you can find your app under the following url: http://app-name.herokuapp.com/
+  * from now on you can find your app under the following url: http://app-name.herokuapp.com/
 
 3.
 add the following in ".git/config" (the folder .git is normally hidden so change your preferences if you can't find in)
@@ -66,15 +66,15 @@ add the following in ".git/config" (the folder .git is normally hidden so change
         fetch = +refs/heads/*:refs/remotes/heroku/*
 
 4.
-..*run the following command in the terminal:
-	>$ heroku labs:enable user-env-compile --app app_name
+  *run the following command in the terminal:
+	> $ heroku labs:enable user-env-compile --app app_name
 
 5.
-	>$ git push app_name master
+	> $ git push app_name master
 
 6.
 create migration and admin in rails console by running the following commands:
-	>$ heroku run rake db:migrate --app app-name
-	>$ heroku run rails c --app app_name
-	>> User.delete_all
-	>> User.create(:name=>"admin", :email=>"admin@railsgirls.com", :password= "password", :password_confirmation=>"password")
+	> $ heroku run rake db:migrate --app app-name
+	> $ heroku run rails c --app app_name
+	> > User.delete_all
+	> > User.create(:name=>"admin", :email=>"admin@railsgirls.com", :password= "password", :password_confirmation=>"password")

@@ -113,7 +113,7 @@ class WorkshopsController < ApplicationController
     end
 
     def get_receiptments_from_params(params)
-      workshop = Workshop.find(params['workshop']['id'])
+      workshop = Workshop.find(params['id'])
       receipments = []
       if params["admins"]
         User.all.each do |user|

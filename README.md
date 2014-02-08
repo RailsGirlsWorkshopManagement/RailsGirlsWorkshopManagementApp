@@ -42,7 +42,7 @@ Password: rgdemo14
 
 
 ## Instructions
-1. Download Project
+1.Download Project
   * open your terminal
   * go to the directory you want to create the project by using >$ cd
   * run the following command to download the repository:
@@ -51,7 +51,7 @@ Password: rgdemo14
 $ git clone git@github.com:RailsGirlsWorkshopManagement/RailsGirlsWorkshopManagementApp.git
 ```
 
-2. Create Heroku App
+2.Create Heroku App
   * run the following commands to login to your heroku accound and create your app:
 
 ```
@@ -62,7 +62,7 @@ $ heroku create app-name --addons mongohq
 
   * from now on you can find your app under the following url: http://app-name.herokuapp.com/
 
-3. Create git remote
+3.Create git remote
   * add the following in ".git/config" (the folder .git is normally hidden so change your preferences if you can't find in)
 
 ```
@@ -71,20 +71,20 @@ $ heroku create app-name --addons mongohq
         fetch = +refs/heads/*:refs/remotes/heroku/*
 ```
 
-4. Settings for Environment Variables
+4.Settings for Environment Variables
   *run the following command in the terminal:
 
 ```
 $ heroku labs:enable user-env-compile --app app_name
 ```
 
-5. Push your app to heroku
+5.Push your app to heroku
 
 ```
 $ git push app_name master
 ```
 
-6.
+6.Create admins
 create migration and admin in rails console by running the following commands:
 
 ```

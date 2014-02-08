@@ -7,6 +7,4 @@ $ ->
 		$(this).closest('form').submit()
 
 	$('#list_registrations form input.comment').on 'blur', ->
-		$(this).closest('form').submit()
-
-
+		$(this).closest('form').submit() 

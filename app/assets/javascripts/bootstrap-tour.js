@@ -406,7 +406,33 @@
     };
 
     Tour.prototype._isRedirect = function(path, currentPath) {
-      return (path != null) && path !== "" && path.replace(/\?.*$/, "").replace(/\/?$/, "") !== currentPath.replace(/\/?$/, "");
+      return (path != null) && path !== "" && path.replace(/\?.*$/, "").replace(/\/?$/, "") !== currentPath.replace(/\/?$/, "") && this._isDynamicDifferent(path, currentPath);
+    };
+
+    Tour.prototype._isDynamicDifferent = function(path, currentPath) {
+      var different = true;
+
+      if(path.indexOf('{{workshop_id}}') > -1) {
+        var workshop_id = localStorage.getItem('workshop_id');
+        if(typeof workshop_id !== 'undefined' && workshop_id) {
+          path = path.replace('{{workshop_id}}', workshop_id);
+          different = path !== currentPath;
+        } else {
+          different = false;
+        }
+      }
+
+      if(path.indexOf('{{form_id}}') > -1) {
+        var form_id = localStorage.getItem('form_id');
+        if(typeof form_id !== 'undefined' && form_id) {
+          path = path.replace('{{form_id}}', form_id);
+          different = path !== currentPath;
+        } else {
+          different = false;
+        }
+      }
+
+      return different;
     };
 
     Tour.prototype._redirect = function(step, path) {

@@ -255,7 +255,7 @@ MainTour.prototype.getMainSteps = function() {
 		},
 		{
 			path: "/workshops/{{workshop_id}}/edit",
-			element: "form.edit_workshop",
+			element: "div.workshop_details_box",
 			placement: "right",
 			title: "Workshop Details",
 			content: "This box gives you an overview of your workshop details. You can always update the fields by clicking 'Update Workshop'.",
@@ -264,7 +264,7 @@ MainTour.prototype.getMainSteps = function() {
 		{
 			path: "/workshops/{{workshop_id}}/edit",
 			element: "div.workshop_show_mail_box",
-			placement: "right",
+			placement: "left",
 			title: "Workshop E-Mail Configuration",
 			onShown: function() {
 				$("div.workshop_show_mail_box").on('click', function(e) {

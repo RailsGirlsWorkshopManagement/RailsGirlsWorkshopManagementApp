@@ -3,7 +3,6 @@ require 'json'
 class RegistrationsController < ApplicationController
   before_action :set_registration, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, only: [:index, :edit, :update, :show]
-  include ApplicationHelper
   # GET /registrations
   # GET /registrations.json
   def index
@@ -113,7 +112,7 @@ class RegistrationsController < ApplicationController
       if @registration.save
         # send email to participant after registration not working jet.
         workshop = @registration.form.workshop
-        RegistrationMailer.welcome_email(@registration, workshop.mail_template, delivery_options).deliver
+        RegistrationMailer.welcome_email(@registration, workshop.mail_template).deliver
         flash[:success] = "Your registration was successful"
         redirect_to success_reg_path
       else

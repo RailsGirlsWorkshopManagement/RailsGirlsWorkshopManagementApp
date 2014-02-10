@@ -18,8 +18,9 @@ module ApplicationHelper
       user_name: self.settings.email_user_name,
       password: self.settings.email_password,
       address: self.settings.email_host,
-      # port: self.settings.email_port,
-      # authentication: self.settings.email_authentication
+      port: self.settings.email_port,
+      authentication: self.settings.email_authentication,
+      enable_starttls_auto: true
     }
   end
 end

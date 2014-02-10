@@ -1,19 +1,13 @@
-(function() {
-  $(function() {
-    $('#list_options form select, #list_registrations form input[type="checkbox"]').on('change', function() {
-      return $(this).closest('form').submit();
-    });
-    return $('#list_registrations form input.comment').on('blur', function() {
-      return $(this).closest('form').submit();
-    });
-  });
-
-}).call(this);
-
-
 $(function(){
 	bindButtons();
 	minimize_maximize(true, $('#list_registrations thead td'), $('#list_registrations tbody td'));
+
+	$('#list_options form select, #list_registrations form input[type="checkbox"]').on('change', function() {
+		return $(this).closest('form').submit();
+	});
+	$('#list_registrations form textarea.comment').on('blur', function() {
+		return $(this).closest('form').submit();
+	});
 });
 
 function bindButtons() {

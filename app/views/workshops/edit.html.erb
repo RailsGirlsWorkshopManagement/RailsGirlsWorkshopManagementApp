@@ -2,15 +2,15 @@
 
 <h1><%=workshop.name%> <%=workshop.date%></h1>
 
-<h1 id="workshop_navi">
+<div id="workshop_navi">
   <% if !workshop.published and !workshop.participant_form.nil? %>
 
-    <%= link_to "publish", { :controller => "workshops", :action => "publish", :id=>workshop.id} do %>
+    <%= link_to publish_workshop_path(workshop.id), :title=>"publish", :class=>"green" do %>
       <i class="fa fa-eye"></i> publish workshop
     <% end %>
   
   <% elsif !workshop.participant_form.nil? %>
-    <%= link_to "unpublish", { :controller => "workshops", :action => "unpublish", :id=>workshop.id} do %>
+    <%= link_to unpublish_workshop_path(workshop.id), :title=>"unpublish", :class=>"red" do %>
       <i class="fa fa-eye-slash"></i> unpublish workshop
     <% end %>
 
@@ -20,96 +20,106 @@
     <i class="fa fa-arrow-right"></i> show registrations
   <% end %>
 
-</h1>
+</div>
 
-<div class="workshop_show_form_box">
+<div class="box_right">
+  <div class="workshop_show_form_box w_box">
+    <h2>Forms</h2>
+    <div class="participant_box">
+    <h3>Participant Form</h3>
+    <% if workshop.participant_form != nil %>
 
-	<div class="participant_box">
-  <% if workshop.participant_form != nil %>
-
-    <%= link_to edit_form_path(workshop.participant_form.id), :title=>"Edit Participant Form" do %>
-      <i class="fa fa-pencil"> Edit Participant Form</i>
-    <% end %><br/>
-    
-    <%= link_to new_registration_path(:workshop_id=>workshop.id, :type=>:participant), :target=>"_blank", :title=>"Participant Registration Link" do %>
-      <i class="fa fa-arrow-right"></i> Participant Registration Link
-    <% end %><br>
-
-    <%= link_to form_path(workshop.participant_form.id), method: :delete, data: { confirm: 'Are you sure?' }, :title=>"Destroy" do %>
-      <i class="fa fa-trash-o"></i>
-    <% end %>
-
-  <% else %>
-    <!-- <a href="" id="start_tour_add_form">Start Tour for adding a form</a> -->
-    <%= link_to new_form_path(:type => :participant, :workshop_id => workshop.id), :id=>"add_participant_form", :title=>'Add Participant Form' do %>
-      <i class="fa fa-plus"></i> Add Participant Form
-    <% end %><br/>
-
-    <% if @forms.count > 0 %>
-      <%= link_to forms_path(:workshop_id=>workshop.id, :type=>"participant"), :title=>'Add excisting Participant Form' do %> <i class="fa fa-plus"></i> Add excisting Participant Form
-      <% end %>
-    <% end %>
-  
-  <% end %>
-  </div>
-
-  <div class="coachBox">
-    <% if workshop.coach_form != nil %>
-
-      <%= link_to edit_form_path(workshop.coach_form.id), :title=>"Edit Coach Form" do %>
-        <i class="fa fa-pencil"></i> Edit Coach Form
+      <%= link_to edit_form_path(workshop.participant_form.id), :title=>"Edit Participant Form" do %>
+        <i class="fa fa-pencil"></i> Edit Participant Form
       <% end %><br/>
-    
-      <%= link_to new_registration_path(:workshop_id=>workshop.id, :type=>"coach", :coach_key=>workshop.coach_key), :target=>"_blank", :title=>"Coach Registration Link" do %>
-        <i class="fa fa-arrow-right"></i> Coach Registration Link
+      
+      <%= link_to new_registration_path(:workshop_id=>workshop.id, :type=>:participant), :target=>"_blank", :title=>"Participant Registration Link" do %>
+        <i class="fa fa-arrow-right"></i> Participant Registration Link
       <% end %><br>
 
-      <%= link_to form_path(workshop.coach_form.id), method: :delete, data: { confirm: 'Are you sure?' }, :title=>"Destroy" do %>
-        <i class="fa fa-trash-o"></i>
+      <%= link_to form_path(workshop.participant_form.id), method: :delete, data: { confirm: 'Are you sure?' }, :title=>"Destroy" do %>
+        <i class="fa fa-trash-o"></i> Remove form from workshop
       <% end %>
 
     <% else %>
-
-      <%= link_to new_form_path(:type => :coach, :workshop_id => workshop.id), :title=>'Add Coach Form' do %>
-        <i class="fa fa-plus"></i> Add Coach Form
-      <% end %><br />
+      <!-- <a href="" id="start_tour_add_form">Start Tour for adding a form</a> -->
+      <%= link_to new_form_path(:type => :participant, :workshop_id => workshop.id), :id=>"add_participant_form", :title=>'Add Participant Form' do %>
+        <i class="fa fa-plus"></i> Add Participant Form
+      <% end %><br/>
 
       <% if @forms.count > 0 %>
-        <%= link_to forms_path(:workshop_id=>workshop.id, :type=>"coach"), :title=>'Add existing Coach Form' do %>
-          <i class="fa fa-plus"></i> Add existing Coach Form
+        <%= link_to forms_path(:workshop_id=>workshop.id, :type=>"participant"), :title=>'Add excisting Participant Form' do %> <i class="fa fa-plus"></i> Add excisting Participant Form
         <% end %>
       <% end %>
     
     <% end %>
+    </div>
+
+    <div class="coachBox">
+      <h3>Coach Form</h3>
+      <% if workshop.coach_form != nil %>
+
+        <%= link_to edit_form_path(workshop.coach_form.id), :title=>"Edit Coach Form" do %>
+          <i class="fa fa-pencil"></i> Edit Coach Form
+        <% end %><br/>
+      
+        <%= link_to new_registration_path(:workshop_id=>workshop.id, :type=>"coach", :coach_key=>workshop.coach_key), :target=>"_blank", :title=>"Coach Registration Link" do %>
+          <i class="fa fa-arrow-right"></i> Coach Registration Link
+        <% end %><br>
+
+        <%= link_to form_path(workshop.coach_form.id), method: :delete, data: { confirm: 'Are you sure?' }, :title=>"Destroy" do %>
+          <i class="fa fa-trash-o"></i> Remove form from workshop
+        <% end %>
+
+      <% else %>
+
+        <%= link_to new_form_path(:type => :coach, :workshop_id => workshop.id), :title=>'Add Coach Form' do %>
+          <i class="fa fa-plus"></i> Add Coach Form
+        <% end %><br />
+
+        <% if @forms.count > 0 %>
+          <%= link_to forms_path(:workshop_id=>workshop.id, :type=>"coach"), :title=>'Add existing Coach Form' do %>
+            <i class="fa fa-plus"></i> Add existing Coach Form
+          <% end %>
+        <% end %>
+      
+      <% end %>
+    </div>
+
   </div>
 
-</div>
+  <div class="workshop_show_mail_box w_box">
+    <h2>E-Mail</h2>
+    <% if workshop.mail_template != nil %>
+      <h3>Automatic Confirmation E-Mails</h3>
+      <%= link_to edit_mail_template_path(workshop.mail_template.id), :title=>"Edit Mail Template" do %>
+        <i class="fa fa-pencil"></i> Edit Mail Template
+      <% end %><br />
+    
+    <% else %>
+    
+      <%= link_to new_mail_template_path(:workshop_id => workshop.id), :title=>'Add Mail Template' do %>
+        <i class="fa fa-plus"></i> Add Mail Template for automatic Email confirmations after every registration
+      <% end %><br />
 
-<%= render 'form' %>
-
-<div class="workshop_show_mail_box">
-  <% if workshop.mail_template != nil %>
-
-    <%= link_to edit_mail_template_path(workshop.mail_template.id), :title=>"Edit Mail Template" do %>
-      <i class="fa fa-pencil"></i> Edit Mail Template for automatic Email confirmations after every registration
-    <% end %><br />
-  
-  <% else %>
-  
-    <%= link_to new_mail_template_path(:workshop_id => workshop.id), :title=>'Add Mail Template' do %>
-      <i class="fa fa-plus"></i> Add Mail Template for automatic Email confirmations after every registration
-    <% end %><br />
-
-    <% if @mail_templates.count > 0 %>
-      <%= link_to mail_templates_path(:workshop_id => workshop.id), :title=>'Add excisting Mail Template' do %>
-        <i class="fa fa-plus"></i> Existing
+      <% if @mail_templates.count > 0 %>
+        <%= link_to mail_templates_path(:workshop_id => workshop.id), :title=>'Add excisting Mail Template' do %>
+          <i class="fa fa-plus"></i> Existing
+        <% end %>
       <% end %>
+    
     <% end %>
-  
-  <% end %>
+    <h3>Manual Mails</h3>
+    <%= link_to workshops_manual_mail_show_path(workshop), :title=>'New Mail' do %>
+      <i class="fa fa-envelope"></i> Send Email to multiple participants, coaches or admins
+    <% end %>
 
-	<%= link_to workshops_manual_mail_show_path(workshop), :title=>'New Mail' do %>
-    <i class="fa fa-plus"></i> Send Email to multiple participants, coaches or admins
-  <% end %>
-
+  </div>
 </div>
+
+
+<div class="workshop_details_box w_box">
+  <h2>Details</h2>
+  <%= render 'form' %>
+</div>
+

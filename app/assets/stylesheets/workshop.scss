@@ -2,45 +2,63 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.workshop_show_form_box {
-	width: 500px;
-	height: 600px;
-	float: right;
-	border: solid 1px;
-	margin-top: 50px;
-}
-
-.coachBox {
-	height: 300px;
-	width: 100%;
-	padding: 25px;
-	border-top: solid 1px;
-}
-
-.participant_box {
-	padding: 25px;
-	height: 300px;
-}
-
-
-.edit_workshop {
-	width: 500px;
-	margin-top: 75px;
-	border: solid 1px;
-	padding: 25px;
-	margin-bottom: 20px;
-}
-
 
 #workshop_navi {
-position: absolute;
-right: 200px;
-top: 60px;
+	position: absolute;
+	width: 500px;
+	right: 0px;
+	top: 70px;
+	a, a:visited {
+		font-size: 2em;
+		line-height: 1.125em;
+
+		&.red {
+			color: #d3360b;
+		}
+
+		&.green {
+			color: green;
+		}
+	}
 }
 
-.workshop_show_mail_box {
-	width: 500px;
-	height: 197px;
-	border: solid 1px;
+.w_box {
+	background: #efefef;
 	padding: 25px;
+
+	h2 {
+		margin: 0 0 20px;
+		//font-size: 2em;
+		//font-weight: bold;
+		//color: #333;
+	}
+}
+
+.box_right {
+	margin-top: 50px;
+	width: 500px;
+	float: right;
+}
+
+.workshop_show_form_box {
+	margin-bottom: 30px;
+
+
+	.coachBox {
+		width: 100%;
+	}
+
+	.participant_box {
+		// height: 300px;
+	}
+
+	.workshop_show_mail_box {
+		width: 500px;
+	}
+}
+
+.workshop_details_box {
+	width: 500px;
+	margin-top: 75px;
+	margin-bottom: 20px;
 }

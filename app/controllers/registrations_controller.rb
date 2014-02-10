@@ -201,7 +201,7 @@ class RegistrationsController < ApplicationController
     def signed_in_user
       store_location
       unless signed_in?
-        flash[:success] = "Only for Admins available! Please sign in."
+        flash[:error] = "Only for Admins available! Please sign in."
         redirect_to admin_path
       end
     end

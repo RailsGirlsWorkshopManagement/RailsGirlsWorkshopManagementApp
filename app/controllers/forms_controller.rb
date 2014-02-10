@@ -81,6 +81,14 @@ class FormsController < ApplicationController
       @form = Form.find(params[:id])
     end
 
+    def signed_in_user
+      store_location
+      unless signed_in?
+        flash[:error] = "Only for Admins available! Please sign in."
+        redirect_to admin_path
+      end
+    end
+
     # Only allow a trusted parameter "white list" through.
     def form_params
       params[:form]

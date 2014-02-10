@@ -1,5 +1,7 @@
 class SettingsController < ApplicationController
   # GET /settings/1/edit
+  before_action :signed_in_user
+
   def edit
     @settings = Settings.find(params[:id])
   end
@@ -21,5 +23,13 @@ class SettingsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def settings_params
       params[:settings]
+    end
+
+    def signed_in_user
+      store_location
+      unless signed_in?
+        flash[:error] = "Only for Admins available! Please sign in."
+        redirect_to admin_path
+      end
     end
 end

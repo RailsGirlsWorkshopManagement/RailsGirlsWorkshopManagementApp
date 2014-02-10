@@ -2,7 +2,7 @@ require 'json'
 
 class RegistrationsController < ApplicationController
   before_action :set_registration, only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user, only: [:index, :edit, :update, :show]
+  before_action :signed_in_user, only: [:index, :update, :destroy, :comment_registrations, :cancel, :accept_registrations]
   # GET /registrations
   # GET /registrations.json
   def index
@@ -78,11 +78,6 @@ class RegistrationsController < ApplicationController
         format.csv
         format.xls
     end
-  end
-
-  # GET /registrations/1
-  # GET /registrations/1.json
-  def show
   end
 
   # GET /registrations/new
@@ -206,7 +201,7 @@ class RegistrationsController < ApplicationController
     def signed_in_user
       store_location
       unless signed_in?
-        flash[:success] = "Only for Admins available! Please sign in."
+        flash[:error] = "Only for Admins available! Please sign in."
         redirect_to admin_path
       end
     end

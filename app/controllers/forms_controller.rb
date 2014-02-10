@@ -2,7 +2,7 @@ require 'json'
 
 class FormsController < ApplicationController
   before_action :set_form, only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user, only: [:index, :show, :edit, :create, :update, :destroy]
+  before_action :signed_in_user
 
   # GET /forms
   def index
@@ -79,6 +79,14 @@ class FormsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_form
       @form = Form.find(params[:id])
+    end
+
+    def signed_in_user
+      store_location
+      unless signed_in?
+        flash[:error] = "Only for Admins available! Please sign in."
+        redirect_to admin_path
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

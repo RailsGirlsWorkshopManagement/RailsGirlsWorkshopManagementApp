@@ -12,4 +12,14 @@ module ApplicationHelper
   def settings
   	Settings.first || Settings.create
   end
+
+  def delivery_options
+    delivery_options = {
+      user_name: self.settings.email_user_name,
+      password: self.settings.email_password,
+      address: self.settings.email_host,
+      # port: self.settings.email_port,
+      # authentication: self.settings.email_authentication
+    }
+  end
 end

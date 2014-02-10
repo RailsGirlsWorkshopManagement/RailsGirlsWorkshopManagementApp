@@ -33,8 +33,9 @@ Railsgirls::Application.configure do
     port:                 587,
     # domain:               'example.com',
     user_name:            'railsgirlsmanagement@gmail.com',
-    password:             'hsdfajklw4jkhl213!"',
+    password:             '',
     authentication:       'plain',
 
     enable_starttls_auto: true  }
+
 end

@@ -1,7 +1,7 @@
 class MailTemplatesController < ApplicationController
 
   before_action :set_mail_template, only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user, only: [:edit, :update]
+  before_action :signed_in_user
 
   # GET /mail_templates/1/edit
   def edit

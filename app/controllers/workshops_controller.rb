@@ -3,7 +3,7 @@ require 'active_support'
 class WorkshopsController < ApplicationController
 
   before_action :set_workshop, only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user, only: [:new, :create, :index, :edit, :update, :show]
+  before_action :signed_in_user
   # GET /workshops
   def index
     @workshops = Workshop.all

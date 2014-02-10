@@ -1,5 +1,7 @@
 class SettingsController < ApplicationController
   # GET /settings/1/edit
+  before_action :signed_in_user
+
   def edit
     @settings = Settings.find(params[:id])
   end

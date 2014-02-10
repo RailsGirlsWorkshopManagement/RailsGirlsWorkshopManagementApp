@@ -9,6 +9,6 @@ class Settings
   key :email_host,				String, :default =>"smtp.gmail.com"
   key :email_port,				Integer, :default =>587
   key :email_user_name,			String, :default => "railsgirlsmanagement@gmail.com"
-  key :email_password,			String, :default => "hsdfajklw4jkhl213!"
+  key :email_password,			String, :default => ""
   key :email_authentication,	String, :default =>"plain"
 end

@@ -31,6 +31,7 @@
               <td><strong>Accept</strong></td>
               <td><strong>Cancled</strong></td>
               <td><strong>Comment</strong></td>
+              <td><strong>Registration Date</strong></td>
           <% end %>
         </tr>
       </thead>
@@ -59,6 +60,9 @@
                 <%= hidden_field :registration, :id, :value => registration["id"] %>
                 <%= text_area :registration, :comment, :value => registration["attributes"]["comment"], class: "comment" %>
               <% end %>
+            </td>
+            <td>
+              <%= registration["attributes"]["created_at"] %>
             </td>
 
 

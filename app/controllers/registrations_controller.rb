@@ -15,7 +15,7 @@ class RegistrationsController < ApplicationController
     if workshops.length == 0 
       if params["workshop"] == 'all'
         workshops = Workshop.all
-      else
+      elsif not Workshop.last.nil?
         workshops = [Workshop.last]
       end
     end

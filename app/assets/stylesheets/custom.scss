@@ -6,6 +6,10 @@ $white: #fff;
 $railsRed: #d3360b;
 
 
+.container {
+  position: relative;
+}
+
 .navbar{
   background-color: $railsRed;
   min-height: inherit;

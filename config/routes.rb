@@ -17,8 +17,8 @@ Railsgirls::Application.routes.draw do
   resources :registrations, :except => [:edit, :show]
 
 
-  get 'workshops/:id/publish' => 'workshops#publish'
-  get 'workshops/:id/unpublish' => 'workshops#unpublish'
+  get 'workshops/:id/publish' => 'workshops#publish', as: :publish_workshop
+  get 'workshops/:id/unpublish' => 'workshops#unpublish', as: :unpublish_workshop
   post 'workshops/:id/addForm' => 'workshops#addForm'
   post 'workshops/:id/manual_mail_send' => 'workshops#manual_mail_send'
   get 'workshops/:id/manual_mail_show' => 'workshops#manual_mail_show', as: :workshops_manual_mail_show

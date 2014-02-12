@@ -24,6 +24,7 @@ Password: rgdemo14
 - Export the selected registration data to csv or excel
 
 ### Email-Management:
+- Insert your smtp settings to use the mail functionality in the admin interface under app settings
 - Edit the default template of the Confirmation Email which gets sent to all Admins and the participant after a registration
 - The E-Mail is personalized and contains information about the workshop and a link to cancel a registration
 - Send a manual email to all participants, admins, coaches, rejected participants, accepted participants
@@ -62,7 +63,7 @@ $ heroku create app-name --addons mongohq
 
 
 3.Create git remote
-  * add the following in ".git/config" (the folder .git is normally hidden so change your preferences if you can't find in)
+  * add the following in ".git/config" (the folder .git is normally hidden so change your preferences if you can't find it)
 
 ```
  [remote "app_name"]
@@ -90,5 +91,5 @@ create migration and admin in rails console by running the following commands:
 $ heroku run rake db:migrate --app app-name
 $ heroku run rails c --app app_name
 > User.delete_all
-> User.create(:name=>"admin", :email=>"admin@railsgirls.com", :password= "password", :password_confirmation=>"password")
+> User.create(:name=>"admin", :email=>"admin@railsgirls.com", :password=>"password", :password_confirmation=>"password")
 ```

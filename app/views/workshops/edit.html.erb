@@ -98,6 +98,8 @@
     
     <% else %>
     
+<%
+=begin
       <%= link_to new_mail_template_path(:workshop_id => workshop.id), :title=>'Add Mail Template' do %>
         <i class="fa fa-plus"></i> Add Mail Template for automatic Email confirmations after every registration
       <% end %><br />
@@ -107,6 +109,8 @@
           <i class="fa fa-plus"></i> Existing
         <% end %>
       <% end %>
+=end
+%>
     
     <% end %>
     <h3>Manual Mails</h3>

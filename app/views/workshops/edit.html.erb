@@ -90,29 +90,10 @@
 
   <div class="workshop_show_mail_box w_box">
     <h2>E-Mail</h2>
-    <% if workshop.mail_template != nil %>
       <h3>Automatic Confirmation E-Mails</h3>
       <%= link_to edit_mail_template_path(workshop.mail_template.id), :title=>"Edit Mail Template" do %>
         <i class="fa fa-pencil"></i> Edit Mail Template
       <% end %><br />
-    
-    <% else %>
-    
-<%
-=begin
-      <%= link_to new_mail_template_path(:workshop_id => workshop.id), :title=>'Add Mail Template' do %>
-        <i class="fa fa-plus"></i> Add Mail Template for automatic Email confirmations after every registration
-      <% end %><br />
-
-      <% if @mail_templates.count > 0 %>
-        <%= link_to mail_templates_path(:workshop_id => workshop.id), :title=>'Add excisting Mail Template' do %>
-          <i class="fa fa-plus"></i> Existing
-        <% end %>
-      <% end %>
-=end
-%>
-    
-    <% end %>
     <h3>Manual Mails</h3>
     <%= link_to workshops_manual_mail_show_path(workshop), :title=>'New Mail' do %>
       <i class="fa fa-envelope"></i> Send Email to multiple participants, coaches or admins

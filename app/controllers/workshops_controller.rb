@@ -133,23 +133,31 @@ class WorkshopsController < ApplicationController
         end
       end
       if params["participants"]
-        workshop.participant_form.registrations.each do |registration|
-          receipments.push registration.email
+        if !workshop.participant_form.nil?
+          workshop.participant_form.registrations.each do |registration|
+            receipments.push registration.email
+          end
         end
       end
       if params["coach"]
-        workshop.coach_form.registrations.each do |registration|
-          receipments.push registration.email
+        if !workshop.coach_form.nil?
+          workshop.coach_form.registrations.each do |registration|
+            receipments.push registration.email
+          end
         end
       end
       if params["participants_accepted"]
-        workshop.participant_form.registrations.find_all_by_accepted(true).each do |registration|
-          receipments.push registration.email
+        if !workshop.participant_form.nil?
+          workshop.participant_form.registrations.find_all_by_accepted(true).each do |registration|
+            receipments.push registration.email
+          end
         end
       end
       if params["participants_rejected"]
-        workshop.participant_form.registrations.all(:accepted.ne => true).each do |registration|
-          receipments.push registration.email
+        if !workshop.participant_form.nil?
+          workshop.participant_form.registrations.all(:accepted.ne => true).each do |registration|
+            receipments.push registration.email
+          end
         end
       end
       receipments

@@ -228,7 +228,7 @@ MainTour.prototype.getMainSteps = function() {
 			element: "form#new_workshop input[type='submit']",
 			placement: "bottom",
 			title: "Ready to continue?",
-			content: "Have you entered all the requiered information? Perfect! Let's go on.",
+			content: "Have you entered all the required information? Perfect! Let's go on.",
 			onNext: function() {
 				if($('#workshop_name').val() === '' ||
 						$('#workshop_description').val() === '' ||

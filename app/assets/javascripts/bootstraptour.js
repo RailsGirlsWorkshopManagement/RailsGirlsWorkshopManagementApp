@@ -228,7 +228,7 @@ MainTour.prototype.getMainSteps = function() {
 			element: "form#new_workshop input[type='submit']",
 			placement: "bottom",
 			title: "Ready to continue?",
-			content: "Have you entered all the requiered information? Perfect! Let's go on.",
+			content: "Have you entered all the required information? Perfect! Let's go on.",
 			onNext: function() {
 				if($('#workshop_name').val() === '' ||
 						$('#workshop_description').val() === '' ||
@@ -282,7 +282,7 @@ MainTour.prototype.getMainSteps = function() {
 		{
 			path: "/workshops/{{workshop_id}}/edit",
 			element: "div.workshop_show_mail_box",
-			placement: "right",
+			placement: "left",
 			title: "Want to end the tour?",
 			onShown: function() {
 				$("div.workshop_show_mail_box").on('click', function(e) {

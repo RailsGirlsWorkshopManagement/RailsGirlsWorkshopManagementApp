@@ -8,10 +8,6 @@
   }
   structure_to_render = <%= @form.structure.html_safe %>;
   structure_to_render.push({
-      "type" : "submit",
-      "value" : "Register"
-  });
-  structure_to_render.push({
     "type": "hidden",
     "name": "authenticity_token",
     "value": "<%= form_authenticity_token %>"
@@ -20,6 +16,15 @@
     "type": "hidden",
     "name": "form_id",
     "value": "<%= @form.id %>"
+  });
+  structure_to_render.push({
+    "type": "checkbox",
+    "name": "global_data_transmission",
+    "caption": "I agree to the transmission of my firstname, lastname and e-mail address to the global Rails Girls server for further events"
+  });
+  structure_to_render.push({
+      "type" : "submit",
+      "value" : "Register"
   });
 </script>
 <form id="form_preview"></form>

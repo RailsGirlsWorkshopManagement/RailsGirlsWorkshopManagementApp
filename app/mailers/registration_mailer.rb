@@ -7,8 +7,8 @@ class RegistrationMailer < ActionMailer::Base
 		end
 		mail_template.filter_text(registration)
 		mail(
-			from: ApplicationController.helpers.settings.email_user_name,
-			to: participant_email_with_name,
+			from: participant_email_with_name,
+			to: registration.email,
 			bcc: user_mails,
 			subject: mail_template.subject,
 			body: mail_template.text,

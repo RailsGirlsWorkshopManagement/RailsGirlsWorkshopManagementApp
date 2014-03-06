@@ -17,6 +17,12 @@ $railsRed: #d3360b;
 .navbar{
   background-color: $railsRed;
   min-height: inherit;
+
+  .container {
+    margin-top: 50px;
+    height: 70px;
+  }
+
   ul{
     li{
       float: right;
@@ -29,10 +35,6 @@ $railsRed: #d3360b;
         }
       }
     }
-  }
-  img{
-    margin-top: 6px;
-    height: 25px;
   }
 }
 
@@ -47,7 +49,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 150px;
 }
 
 section {

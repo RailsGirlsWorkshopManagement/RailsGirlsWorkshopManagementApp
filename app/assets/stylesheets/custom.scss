@@ -5,36 +5,16 @@ $black: #000;
 $white: #fff;
 $railsRed: #d3360b;
 
+#mainContainer {
+  padding: 0 50px;
+}
 
 .container {
   position: relative;
-  min-width: 1170px !important;
 }
 
 .tour-step-backdrop {
   padding: 5px;
-}
-
-.navbar{
-  background-color: $railsRed;
-  min-height: inherit;
-  ul{
-    li{
-      float: right;
-
-      a{
-        color: $white;
-        font-weight: normal; 
-        &:hover{
-          color: #000000;
-        }
-      }
-    }
-  }
-  img{
-    margin-top: 6px;
-    height: 25px;
-  }
 }
 
 @mixin box_sizing {
@@ -48,7 +28,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 150px;
 }
 
 section {
@@ -194,5 +174,52 @@ td {
   .alert-error .alert-link {
     color: #2b542c; }
 
+/*
+ * Header
+ */
+
+.navbar{
+  background-color: $railsRed;
+  min-height: inherit;
+
+  .container {
+    margin-top: 50px;
+    height: 70px;
+  }
+
+  ul li {
+    font-size: 20px;
+    font-weight: 300;
+    float: right;
+    line-height: 20px;
+
+    a {
+      color: $white;
+      padding-left: 20px;
+
+      &:hover {
+        background: none;
+        text-decoration: underline;
+        background: url(star.png) left no-repeat;
+      }
+    }
+  }
+}
 
 
+
+.login-form {
+  @extend .col-md-offset-4;
+  @extend .col-md-4;
+}
+
+
+
+/*
+ * Fonts
+ */
+
+body {
+  font: 13px/1.5 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
+  text-rendering: optimizelegibility;
+}

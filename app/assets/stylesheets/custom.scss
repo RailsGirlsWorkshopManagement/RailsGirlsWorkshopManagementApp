@@ -208,6 +208,13 @@ td {
 
 
 
+.login-form {
+  @extend .col-md-offset-4;
+  @extend .col-md-4;
+}
+
+
+
 /*
  * Fonts
  */

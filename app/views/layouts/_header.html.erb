@@ -17,9 +17,10 @@
             <li>
               <%= link_to "Workshops", workshops_path %>
             </li>
+          <% else %>
+            <li><%= link_to "Login", admin_path %></li>
           <% end %>
 
-          <li><%= link_to "Login", admin_path %></li>
           <li>
             <%= link_to "Home", home_path %>
           </li>

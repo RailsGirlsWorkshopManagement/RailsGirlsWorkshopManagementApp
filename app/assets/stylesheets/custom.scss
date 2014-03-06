@@ -14,30 +14,6 @@ $railsRed: #d3360b;
   padding: 5px;
 }
 
-.navbar{
-  background-color: $railsRed;
-  min-height: inherit;
-
-  .container {
-    margin-top: 50px;
-    height: 70px;
-  }
-
-  ul{
-    li{
-      float: right;
-
-      a{
-        color: $white;
-        font-weight: normal; 
-        &:hover{
-          color: #000000;
-        }
-      }
-    }
-  }
-}
-
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -194,6 +170,40 @@ td {
     border-top-color: #992828; }
   .alert-error .alert-link {
     color: #2b542c; }
+
+/*
+ * Header
+ */
+
+.navbar{
+  background-color: $railsRed;
+  min-height: inherit;
+
+  .container {
+    margin-top: 50px;
+    height: 70px;
+  }
+
+  ul li {
+    font-size: 20px;
+    font-weight: 300;
+    float: right;
+    line-height: 20px;
+
+    a {
+      color: $white;
+      padding-left: 20px;
+
+      &:hover {
+        background: none;
+        text-decoration: underline;
+        background: url(star.png) left no-repeat;
+      }
+    }
+  }
+}
+
+
 
 /*
  * Fonts

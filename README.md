@@ -2,9 +2,10 @@
 
 The Application helps the very independent Rails Girls groups located all over the world to manage and organize their workshop registration process. Main focus of the project lays on cooperation and the development for multiple teams who used, tested and evaluated this product since October 2013.
 
-See for yourself: railsgirls-demo.herokuapp.com/admin
-Email: admin@railsgirls.com
-Password: rgdemo14
+#### See for yourself: 
+- An [http://railsgirls-demo.herokuapp.com/admin](http://railsgirls-demo.herokuapp.com/admin "http://railsgirls-demo.herokuapp.com/admin")
+- Email: admin@railsgirls.com
+- Password: rgdemo14
 
 ## Functionality:
 
